@@ -1,6 +1,13 @@
+import { useState } from "react";
+
 /* Firebase SDK */
 import { initializeApp } from "firebase/app";
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import {
+    getAuth,
+    createUserWithEmailAndPassword,
+    signInWithEmailAndPassword,
+    onAuthStateChanged,
+} from "firebase/auth";
 
 const firebaseConfig = {
     apiKey: "AIzaSyDKIWbbwfbhBiS6avLOlHmTHoIq4v4i2dE",
@@ -16,10 +23,13 @@ const app = initializeApp(firebaseConfig);
 
 /* App Component */
 function App() {
-    const handleSubmit = (event) => {
-        event.preventDefault();
+    const [email, setEmail] = useState();
+    const [password, setPassword] = useState();
+
+    const signUp = async (e) => {
+        e.preventDefault();
         const auth = getAuth(app);
-        createUserWithEmailAndPassword(auth, "test@gmail.com", "test123")
+        await createUserWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
                 // Signed in
                 const user = userCredential.user;
@@ -28,18 +38,78 @@ function App() {
             .catch((error) => {
                 const errorCode = error.code;
                 const errorMessage = error.message;
+                console.log(errorCode);
+                console.log(errorMessage);
+                errorCode === "auth/invalid-email" &&
+                    alert("Email should be valid email");
+                errorCode === "auth/weak-password" &&
+                    alert("Password should be at least 6 characters");
+                errorCode === "auth/email-already-in-use" &&
+                    alert("Email is already in use");
                 // ..
             });
     };
 
+    const signIn = async (e) => {
+        e.preventDefault();
+        const auth = getAuth(app);
+        await signInWithEmailAndPassword(auth, email, password)
+            .then((userCredential) => {
+                // Signed in
+                const user = userCredential.user;
+                // ...
+            })
+            .catch((error) => {
+                const errorCode = error.code;
+                const errorMessage = error.message;
+                console.log(errorCode);
+                console.log(errorMessage);
+                errorCode === "auth/invalid-email" &&
+                    alert("Email should be valid email");
+                errorCode === "auth/weak-password" &&
+                    alert("Password should be at least 6 characters");
+                errorCode === "auth/email-already-in-use" &&
+                    alert("Email is already in use");
+                // ..
+            });
+
+        const user = auth.currentUser;
+
+        if (user) {
+            // User is signed in, see docs for a list of available properties
+            // https://firebase.google.com/docs/reference/js/firebase.User
+            // ...
+            console.log(user);
+        } else {
+            // No user is signed in.
+            alert();
+        }
+    };
+
     return (
         <>
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={signUp}>
                 <input
                     placeholder="E-mail"
-                    onChange={(event) => console.log(event)}
-                ></input>
-                <button type="button">Sign Up</button>
+                    onChange={(event) => setEmail(event.target.value)}
+                />
+                <input
+                    placeholder="Password"
+                    onChange={(event) => setPassword(event.target.value)}
+                />
+                <button type="submit">Sign Up</button>
+            </form>
+
+            <form onSubmit={signIn}>
+                <input
+                    placeholder="E-mail"
+                    onChange={(event) => setEmail(event.target.value)}
+                />
+                <input
+                    placeholder="Password"
+                    onChange={(event) => setPassword(event.target.value)}
+                />
+                <button type="submit">Sign In</button>
             </form>
         </>
     );
