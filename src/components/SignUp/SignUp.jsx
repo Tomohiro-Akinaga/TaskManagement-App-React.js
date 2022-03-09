@@ -15,13 +15,14 @@ export default function SignUp(props) {
     const [signUp, setSignUp] = useState(true);
     const [email, setEmail] = useState();
     const [password, setPassword] = useState();
-
-    const handleSubmit = (event) => {
-        event.preventDefault();
+    
+    const handleSubmit = (e) => {
+        e.preventDefault();
         createUserWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
                 // Signed in
                 const user = userCredential.user;
+                props.setUser(user);
                 // ...
             })
             .catch((error) => {
@@ -71,7 +72,6 @@ export default function SignUp(props) {
                 <button
                     type="submit"
                     className={SignUpStyle.signUp}
-                    onClick={props.onClick}
                 >
                     {signUp ? `Sign Up` : `Sign In`}
                 </button>
