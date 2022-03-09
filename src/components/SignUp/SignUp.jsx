@@ -22,8 +22,9 @@ const auth = getAuth(app);
 //         // ..
 //     });
 
-export default function SignUp() {
+export default function SignUp(props) {
     const [signUp, setSignUp] = useState(true);
+    
     return (
         <div className={SignUpStyle.container}>
             <p className={SignUpStyle.welcomeMessage}>
@@ -55,7 +56,7 @@ export default function SignUp() {
                         placeholder="Password"
                     />
                 </div>
-                <button type="submit" className={SignUpStyle.signUp}>
+                <button type="submit" className={SignUpStyle.signUp} onClick={props.onClick}>
                     {signUp ? `Sign Up` : `Sign In`}
                 </button>
                 <div className={SignUpStyle.signInContainer}>

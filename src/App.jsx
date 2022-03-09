@@ -1,11 +1,17 @@
+import { useState } from "react";
 import SignUp from "./components/SignUp/SignUp.jsx";
+import Header from "./components/Header/Header.jsx";
 import AppStyle from "./App.module.scss";
 
 function App() {
-
+    const [member, setMember] = useState(false);
+    const handleClick = () => {
+        setMember(true);
+    }
     return (
         <div className={AppStyle.container}>
-            <SignUp />
+            { !member && <SignUp onClick={handleClick}/>}
+            <Header />
         </div>
     )
 }
