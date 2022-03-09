@@ -10,21 +10,27 @@ import { faEnvelope, faLock } from "@fortawesome/free-solid-svg-icons";
 import SignUpStyle from "./SignUp.module.scss";
 
 const auth = getAuth(app);
-// createUserWithEmailAndPassword(auth, email, password)
-//     .then((userCredential) => {
-//         // Signed in
-//         const user = userCredential.user;
-//         // ...
-//     })
-//     .catch((error) => {
-//         const errorCode = error.code;
-//         const errorMessage = error.message;
-//         // ..
-//     });
 
 export default function SignUp(props) {
     const [signUp, setSignUp] = useState(true);
-    
+    const [email, setEmail] = useState();
+    const [password, setPassword] = useState();
+
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        createUserWithEmailAndPassword(auth, email, password)
+            .then((userCredential) => {
+                // Signed in
+                const user = userCredential.user;
+                // ...
+            })
+            .catch((error) => {
+                const errorCode = error.code;
+                const errorMessage = error.message;
+                // ..
+            });
+    };
+
     return (
         <div className={SignUpStyle.container}>
             <p className={SignUpStyle.welcomeMessage}>
@@ -33,7 +39,11 @@ export default function SignUp(props) {
                 {signUp ? `Sign up ` : `Sign in `}
                 to access Task Management
             </p>
-            <form action="submit" className={SignUpStyle.wrapper}>
+            <form
+                action="submit"
+                className={SignUpStyle.wrapper}
+                onSubmit={handleSubmit}
+            >
                 <div className={SignUpStyle.emailContainer}>
                     <FontAwesomeIcon
                         icon={faEnvelope}
@@ -43,6 +53,7 @@ export default function SignUp(props) {
                         type="text"
                         className={SignUpStyle.email}
                         placeholder="E-mail"
+                        onChange={(event) => setEmail(event.target.value)}
                     />
                 </div>
                 <div className={SignUpStyle.passwordContainer}>
@@ -54,9 +65,14 @@ export default function SignUp(props) {
                         type="text"
                         className={SignUpStyle.password}
                         placeholder="Password"
+                        onChange={(event) => setPassword(event.target.value)}
                     />
                 </div>
-                <button type="submit" className={SignUpStyle.signUp} onClick={props.onClick}>
+                <button
+                    type="submit"
+                    className={SignUpStyle.signUp}
+                    onClick={props.onClick}
+                >
                     {signUp ? `Sign Up` : `Sign In`}
                 </button>
                 <div className={SignUpStyle.signInContainer}>
