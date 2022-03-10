@@ -1,7 +1,7 @@
 export default function Header() {
     return (
         <>
-            <h1>Hello!</h1>
+            <h1>I am Header</h1>
         </>
     );
 }
