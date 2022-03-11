@@ -3,7 +3,10 @@ import { faLock } from "@fortawesome/free-solid-svg-icons";
 import PasswordConfirmStyle from "./PasswordConfirm.module.scss";
 
 
-export default function PasswordConfirm() {
+export default function PasswordConfirm({setPasswordConfirm}) {
+    const handleChange = (e) => {
+        setPasswordConfirm(e.target.value);
+    }
     return (
         <div className={PasswordConfirmStyle.container}>
             <FontAwesomeIcon
@@ -14,6 +17,7 @@ export default function PasswordConfirm() {
                 type="text"
                 className={PasswordConfirmStyle.password}
                 placeholder="Confirm Password"
+                onChange={handleChange}
             />
         </div>
     );
