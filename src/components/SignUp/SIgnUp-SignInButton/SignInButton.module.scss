@@ -3,12 +3,12 @@
 .signIn {
     font-size: 1.2rem;
     font-weight: 300;
-    color: $signin-button;
+    color: $signup-button;
     width: 200px;
     height: 40px;
     border-radius: 50px;
     border: none;
-    border: solid 1px $signin-button;
+    border: solid 1px $signup-button;
     background-color: #fff;
     transition: all 0.2s;
     &:hover {
