@@ -1,53 +1,26 @@
-/* Fontawesome */
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEnvelope, faLock } from "@fortawesome/free-solid-svg-icons";
-/* CSS */
+import Email from "./SignUp-Email/Email.jsx";
+import Password from "./SignUp-Password/Password.jsx";
+import PasswordConfirm from "./SignUp-PasswordConfirm/PasswordConfirm.jsx";
+import SignUpButton from "./SignUp-Button/SignUpButton.jsx";
 import SignUpStyle from "./SignUp.module.scss";
+import SignInButton from "../SignIn/SignIn-Button/SignInButton.jsx";
 
 export default function SignUp() {
     return (
-        <div className={SignUpStyle.container}>
-            <p className={SignUpStyle.welcomeMessage}>
-                Hey, Welcome.
-                <br />
-                to access Task Management
-            </p>
-            <form action="submit" className={SignUpStyle.wrapper}>
-                <div className={SignUpStyle.emailContainer}>
-                    <FontAwesomeIcon
-                        icon={faEnvelope}
-                        className={SignUpStyle.emailIcon}
-                    />
-                    <input
-                        type="text"
-                        className={SignUpStyle.email}
-                        placeholder="E-mail"
-                    />
-                </div>
-                <div className={SignUpStyle.passwordContainer}>
-                    <FontAwesomeIcon
-                        icon={faLock}
-                        className={SignUpStyle.passwordIcon}
-                    />
-                    <input
-                        type="text"
-                        className={SignUpStyle.password}
-                        placeholder="Password"
-                    />
-                </div>
-                <button type="submit" className={SignUpStyle.signUp}>
-                    Sign Up
-                </button>
-                <div className={SignUpStyle.signInContainer}>
-                    <p className={SignUpStyle.signInMessage}>
-                        Already a Member?
-                    </p>
-                    <button
-                        type="button"
-                        className={SignUpStyle.signIn}
-                    ></button>
-                </div>
-            </form>
+        <div className={SignUpStyle.body}>
+            <div className={SignUpStyle.container}>
+                <h1 className={SignUpStyle.message}>
+                    Sign up to access Task Management
+                </h1>
+                <form action="submit" className={SignUpStyle.wrapper}>
+                    <Email />
+                    <Password />
+                    <PasswordConfirm />
+                    <SignUpButton />
+                </form>
+                <p className={SignUpStyle.text}>Already an user?</p>
+                <SignInButton />
+            </div>
         </div>
     );
 }

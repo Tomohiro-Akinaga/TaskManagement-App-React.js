@@ -1,0 +1,17 @@
+@import "../variables.scss";
+
+.signUp {
+    font-size: 1.2rem;
+    font-weight: 300;
+    color: #fff;
+    width: 200px;
+    height: 40px;
+    border-radius: 50px;
+    border: none;
+    background-color: $signup-button;
+    transition: all 0.2s;
+    &:hover {
+        cursor: pointer;
+        background-color: $signup-button-hover;
+    }
+}
