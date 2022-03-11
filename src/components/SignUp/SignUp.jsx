@@ -1,26 +1,46 @@
+/* React */
 import PropTypes from "prop-types";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+/* Component */
 import Email from "./SignUp-Email/Email.jsx";
 import Password from "./SignUp-Password/Password.jsx";
 import PasswordConfirm from "./SignUp-PasswordConfirm/PasswordConfirm.jsx";
 import SignUpButton from "./SignUp-Button/SignUpButton.jsx";
 import SignUpStyle from "./SignUp.module.scss";
-import SignInButton from "./SIgnUp-SignInButton/SignInButton.jsx";
+import SignInButton from "./SignUp-SignInButton/SignInButton.jsx";
+/* Firebase */
+import auth from "../../firebaseConfig.js";
+import { createUserWithEmailAndPassword } from "firebase/auth";
 
-function SignUp() {
+function SignUp(props) {
     const [email, setEmail] = useState();
     const [password, setPassword] = useState();
     const [passwordConfirm, setPasswordConfirm] = useState();
     const [error, setError] = useState(false);
+    const navigate = useNavigate();
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        password === passwordConfirm ? authentification() : setError(true);
+        password === passwordConfirm ? createUser() : setError(true);
     };
 
-    const authentification = () => {
-        console.log("Create User");
-    };
+    function createUser() {
+        createUserWithEmailAndPassword(auth, email, password)
+            .then((userCredential) => {
+                // Signed in
+                const user = userCredential.user;
+                props.setUser(user);
+                navigate("/");
+                // ...
+            })
+            .catch((error) => {
+                const errorCode = error.code;
+                const errorMessage = error.message;
+                console.log(error.message);
+                // ..
+            });
+    }
 
     return (
         <div className={SignUpStyle.body}>
