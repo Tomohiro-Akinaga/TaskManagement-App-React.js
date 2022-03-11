@@ -32,6 +32,16 @@
 }
 
 .text {
-    margin-top: 50px;
+    font-size: 1.1rem;
+    margin-top: 30px;
     margin-bottom: 10px;
+}
+
+.errorContainer {
+    height: 50px;
+}
+
+.error {
+    line-height: 50px;
+    color: red;
 }

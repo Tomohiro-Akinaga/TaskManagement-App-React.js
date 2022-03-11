@@ -1,21 +1,26 @@
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 import { useState } from "react";
 import Email from "./SignUp-Email/Email.jsx";
 import Password from "./SignUp-Password/Password.jsx";
 import PasswordConfirm from "./SignUp-PasswordConfirm/PasswordConfirm.jsx";
 import SignUpButton from "./SignUp-Button/SignUpButton.jsx";
 import SignUpStyle from "./SignUp.module.scss";
-import SignInButton from './SIgnUp-SignInButton/SignInButton.jsx';
+import SignInButton from "./SIgnUp-SignInButton/SignInButton.jsx";
 
 function SignUp() {
     const [email, setEmail] = useState();
     const [password, setPassword] = useState();
-    const [psswordConfirm, setPasswordConfirm] = useState();
+    const [passwordConfirm, setPasswordConfirm] = useState();
+    const [error, setError] = useState(false);
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        password === psswordConfirm ? console.log("correct") : console.log("wrong");
-    }
+        password === passwordConfirm ? authentification() : setError(true);
+    };
+
+    const authentification = () => {
+        console.log("Create User");
+    };
 
     return (
         <div className={SignUpStyle.body}>
@@ -23,13 +28,24 @@ function SignUp() {
                 <h1 className={SignUpStyle.message}>
                     Sign up to access Task Management
                 </h1>
-                <form type="submit" onSubmit={handleSubmit}  className={SignUpStyle.wrapper}>
+                <form
+                    type="submit"
+                    onSubmit={handleSubmit}
+                    className={SignUpStyle.wrapper}
+                >
                     <Email setEmail={setEmail} />
                     <Password setPassword={setPassword} />
                     <PasswordConfirm setPasswordConfirm={setPasswordConfirm} />
+                    <div className={SignUpStyle.errorContainer}>
+                        {error && (
+                            <p className={SignUpStyle.error}>
+                                Password and Confirm Password does not match
+                            </p>
+                        )}
+                    </div>
                     <SignUpButton />
                 </form>
-                <p className={SignUpStyle.text}>Already an user?</p>
+                <p className={SignUpStyle.text}>Already an user ?</p>
                 <SignInButton />
             </div>
         </div>
@@ -39,7 +55,7 @@ function SignUp() {
 SignUp.propTypes = {
     setEmail: PropTypes.func,
     setPassword: PropTypes.func,
-    setPasswordConfirm: PropTypes.func
-}
+    setPasswordConfirm: PropTypes.func,
+};
 
 export default SignUp;
