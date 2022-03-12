@@ -21,7 +21,7 @@ function App() {
     return (
         <BrowserRouter>
             <Routes>
-                <Route path="/" element={<Main />} />
+                {user && <Route path="/" element={<Main user={user} />} />}
                 <Route path="signup" element={<SignUp setUser={setUser} />} />
                 <Route path="signin" element={<SignIn />} />
             </Routes>
