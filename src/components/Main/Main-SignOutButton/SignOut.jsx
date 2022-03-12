@@ -8,7 +8,7 @@ export default function SignOut() {
     const handleClick = () => {
         signOut(auth)
             .then(() => {
-                navigate("/signup");
+                navigate("/signin");
             })
             .catch((error) => {
                 alert("Error");

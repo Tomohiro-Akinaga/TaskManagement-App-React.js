@@ -7,8 +7,9 @@ import Email from "./SignUp-Email/Email.jsx";
 import Password from "./SignUp-Password/Password.jsx";
 import PasswordConfirm from "./SignUp-PasswordConfirm/PasswordConfirm.jsx";
 import SignUpButton from "./SignUp-Button/SignUpButton.jsx";
-import SignUpStyle from "./SignUp.module.scss";
 import SignInButton from "./SignUp-SignInButton/SignInButton.jsx";
+/* CSS & Resources */
+import SignUpStyle from "./SignUp.module.scss";
 /* Firebase */
 import auth from "../../firebaseConfig.js";
 import { createUserWithEmailAndPassword } from "firebase/auth";
@@ -24,7 +25,7 @@ function SignUp({ setUser }) {
     function handleSubmit(e) {
         e.preventDefault();
         password === passwordConfirm
-            ? createUser(auth, email, password)
+            ? createUser()
             : setErrorMessage("Password and Confirm Password does not match");
     }
 
@@ -42,13 +43,13 @@ function SignUp({ setUser }) {
                 } else if (errorMessage.includes("invalid-password")) {
                     setErrorMessage("Password should be at least 6 characters");
                 } else if (errorMessage.includes("email-already-in-use")) {
-                    setErrorMessage("E-mail already exsits");
+                    setErrorMessage("User already exsits");
                 }
             });
     }
 
     return (
-        <div className={SignUpStyle.body}>
+        <body className={SignUpStyle.body}>
             <div className={SignUpStyle.container}>
                 <h1 className={SignUpStyle.message}>Create Account</h1>
                 <form
@@ -65,7 +66,7 @@ function SignUp({ setUser }) {
                 <p className={SignUpStyle.text}>Already an user ?</p>
                 <SignInButton />
             </div>
-        </div>
+        </body>
     );
 }
 

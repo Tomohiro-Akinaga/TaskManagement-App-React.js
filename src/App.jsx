@@ -2,6 +2,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { useState, useEffect } from "react";
 /* Component */
+import Welcome from "./components/SignIn/SignIn.jsx";
 import Main from "./components/Main/Main.jsx";
 import SignUp from "./components/SignUp/SignUp.jsx";
 import SignIn from "./components/SignIn/SignIn.jsx";

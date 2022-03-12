@@ -1,0 +1,23 @@
+@import "../../../variable.scss";
+
+.form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.email {
+    border: solid 1.5px $signin-email-border;
+    font-size: 1.3rem;
+    width: 350px;
+    padding: 10px;
+    color: $email-text;
+    &::placeholder {
+        font-size: 1.2rem;
+        font-weight: 300;
+    }
+    &:focus {
+        outline: none;
+    }
+}

@@ -8,7 +8,7 @@ function Main(props) {
     const navigate = useNavigate();
 
     useEffect(() => {
-        props.user ? navigate("/") : navigate("/signup");
+        props.user ? navigate("/") : navigate("/signin");
     }, []);
 
     return (
