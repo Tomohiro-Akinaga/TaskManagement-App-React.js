@@ -4,20 +4,46 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 100%;
+    width: 400px;
 }
 
 .email {
-    border: solid 1.5px $signin-email-border;
+    border: solid 1px $signin-email-border;
     font-size: 1.3rem;
-    width: 350px;
-    padding: 10px;
-    color: $email-text;
+    width: 100%;
+    color: $signin-email-text;
+    margin-bottom: 10px;
     &::placeholder {
         font-size: 1.2rem;
         font-weight: 300;
     }
     &:focus {
         outline: none;
+    }
+}
+
+.password {
+    border: solid 1px $signin-password-border;
+    font-size: 1.3rem;
+    width: 100%;
+    color: $signin-password-text;
+    margin-bottom: 10px;
+    &::placeholder {
+        font-size: 1.2rem;
+        font-weight: 300;
+    }
+    &:focus {
+        outline: none;
+    }
+}
+
+.signIn {
+    font-size: 1.3rem;
+    width: 100%;
+    color: #fff;
+    border: none;
+    background-color: $signin-button;
+    &:hover {
+        cursor: pointer;
     }
 }
