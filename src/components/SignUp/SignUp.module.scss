@@ -21,8 +21,8 @@
 
 .message {
     font-weight: 500;
-    font-size: 1.7rem;
-    margin: 50px 0;
+    font-size: 2rem;
+    margin: 45px 0;
 }
 
 .wrapper {
@@ -37,11 +37,7 @@
     margin-bottom: 10px;
 }
 
-.errorContainer {
-    height: 50px;
-}
-
 .error {
-    line-height: 50px;
+    font-weight: 300;
     color: red;
 }

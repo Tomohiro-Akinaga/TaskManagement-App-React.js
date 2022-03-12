@@ -1,6 +1,6 @@
 /* React */
 import PropTypes from "prop-types";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 /* Component */
 import Email from "./SignUp-Email/Email.jsx";
@@ -13,41 +13,44 @@ import SignInButton from "./SignUp-SignInButton/SignInButton.jsx";
 import auth from "../../firebaseConfig.js";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 
-function SignUp(props) {
+function SignUp({ setUser }) {
     const [email, setEmail] = useState();
     const [password, setPassword] = useState();
     const [passwordConfirm, setPasswordConfirm] = useState();
-    const [error, setError] = useState(false);
+    const [errorMessage, setErrorMessage] = useState();
+
     const navigate = useNavigate();
 
-    const handleSubmit = (e) => {
+    function handleSubmit(e) {
         e.preventDefault();
-        password === passwordConfirm ? createUser() : setError(true);
-    };
+        password === passwordConfirm
+            ? createUser(auth, email, password)
+            : setErrorMessage("Password and Confirm Password does not match");
+    }
 
     function createUser() {
         createUserWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
-                // Signed in
                 const user = userCredential.user;
-                props.setUser(user);
+                setUser(user);
                 navigate("/");
-                // ...
             })
             .catch((error) => {
-                const errorCode = error.code;
                 const errorMessage = error.message;
-                console.log(error.message);
-                // ..
+                if (errorMessage.includes("admin-restricted-operation")) {
+                    setErrorMessage("Enter e-mail and password");
+                } else if (errorMessage.includes("invalid-password")) {
+                    setErrorMessage("Password should be at least 6 characters");
+                } else if (errorMessage.includes("email-already-in-use")) {
+                    setErrorMessage("E-mail already exsits");
+                }
             });
     }
 
     return (
         <div className={SignUpStyle.body}>
             <div className={SignUpStyle.container}>
-                <h1 className={SignUpStyle.message}>
-                    Sign up to access Task Management
-                </h1>
+                <h1 className={SignUpStyle.message}>Create Account</h1>
                 <form
                     type="submit"
                     onSubmit={handleSubmit}
@@ -56,13 +59,7 @@ function SignUp(props) {
                     <Email setEmail={setEmail} />
                     <Password setPassword={setPassword} />
                     <PasswordConfirm setPasswordConfirm={setPasswordConfirm} />
-                    <div className={SignUpStyle.errorContainer}>
-                        {error && (
-                            <p className={SignUpStyle.error}>
-                                Password and Confirm Password does not match
-                            </p>
-                        )}
-                    </div>
+                    <p className={SignUpStyle.error}>{errorMessage}</p>
                     <SignUpButton />
                 </form>
                 <p className={SignUpStyle.text}>Already an user ?</p>
@@ -73,9 +70,7 @@ function SignUp(props) {
 }
 
 SignUp.propTypes = {
-    setEmail: PropTypes.func,
-    setPassword: PropTypes.func,
-    setPasswordConfirm: PropTypes.func,
+    setUser: PropTypes.func,
 };
 
 export default SignUp;

@@ -10,7 +10,7 @@ function Main(props) {
     useEffect(() => {
         props.user ? navigate("/") : navigate("/signup");
     }, []);
-    console.log(props.user);
+
     return (
         <>
             <h1>Hello, World</h1>
