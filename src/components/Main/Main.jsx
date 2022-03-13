@@ -2,14 +2,13 @@ import PropTypes from "prop-types";
 import { useEffect } from "react";
 import { useNavigate } from "react-router";
 import SignOut from "./Main-SignOutButton/SignOut.jsx";
-import auth from "../../firebaseConfig.js";
 
-function Main(props) {
+function Main({ user }) {
     const navigate = useNavigate();
-
+    
     useEffect(() => {
-        props.user ? navigate("/") : navigate("/signin");
-    }, []);
+        user ? navigate("/") : navigate("/signin");
+    }, [user]);
 
     return (
         <>

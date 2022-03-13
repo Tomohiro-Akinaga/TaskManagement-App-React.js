@@ -44,11 +44,7 @@ export default function SignUpForm() {
                     setErrorMessage("Enter valid email");
                 } else if (errorMessage.includes("email-already-in-us")) {
                     setErrorMessage("User already exist");
-                } else if (
-                    errorMessage.includes(
-                        "Password should be at least 6 characters"
-                    )
-                ) {
+                } else if (errorMessage.includes("weak-password")) {
                     setErrorMessage("Password should be at least 6 characters");
                 }
             });

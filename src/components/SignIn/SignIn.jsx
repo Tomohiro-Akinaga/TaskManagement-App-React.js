@@ -2,12 +2,18 @@ import SignInForm from "./SignIn-Form/SignInForm.jsx";
 import SignInStyle from "./SignIn.module.scss";
 import illust from "../../resources/img/signin.jpg";
 import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
-export default function SignIn() {
+export default function SignIn({ user }) {
     const navigate = useNavigate();
+
     const handleSignUp = () => {
         navigate("/signup");
     };
+
+    useEffect(() => {
+        user ? navigate("/") : navigate("/signin");
+    }, [user]);
 
     return (
         <div className={SignInStyle.container}>

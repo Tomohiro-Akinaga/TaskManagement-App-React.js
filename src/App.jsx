@@ -1,6 +1,6 @@
 /* React */
-import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { useState, useEffect } from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 /* Component */
 import Main from "./components/Main/Main.jsx";
 import SignUp from "./components/SignUp/SignUp.jsx";
@@ -11,7 +11,7 @@ import auth from "./firebaseConfig.js";
 
 function App() {
     const [user, setUser] = useState();
-
+    console.log(user);
     useEffect(() => {
         onAuthStateChanged(auth, () => {
             auth.currentUser ? setUser(auth.currentUser) : setUser();
@@ -21,9 +21,9 @@ function App() {
     return (
         <BrowserRouter>
             <Routes>
-                {user && <Route path="/" element={<Main user={user} />} />}
-                <Route path="signup" element={<SignUp setUser={setUser} />} />
-                <Route path="signin" element={<SignIn />} />
+                <Route path="/" element={<Main user={user} />} />
+                <Route path="signup" element={<SignUp user={user} />} />
+                <Route path="signin" element={<SignIn user={user} />} />
             </Routes>
         </BrowserRouter>
     );
