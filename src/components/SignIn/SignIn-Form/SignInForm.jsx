@@ -25,6 +25,7 @@ export default function SignInForm() {
             })
             .catch((error) => {
                 const errorMessage = error.message;
+                console.log(errorMessage);
                 if (!email) {
                     setErrorMessage("Enter valid e-mail");
                 } else if (!password) {
@@ -33,6 +34,8 @@ export default function SignInForm() {
                     setErrorMessage("Enter valid email");
                 } else if (errorMessage.includes("user-not-found")) {
                     setErrorMessage("User does not exist");
+                } else if (errorMessage.includes("wrong-password")) {
+                    setErrorMessage("Confirm email and password");
                 }
             });
     };
