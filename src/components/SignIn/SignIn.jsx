@@ -26,7 +26,7 @@ export default function SignIn() {
                 <div className={SignInStyle.signUp}>
                     <p className={SignInStyle.text}>No account ?</p>
                     <a className={SignInStyle.link} onClick={handleSignUp}>
-                        Sign up for free{" "}
+                        Sign up for free
                     </a>
                 </div>
             </div>
