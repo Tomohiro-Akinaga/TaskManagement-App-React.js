@@ -1,8 +1,14 @@
 import SignInForm from "./SignIn-Form/SignInForm.jsx";
 import SignInStyle from "./SignIn.module.scss";
 import illust from "../../resources/img/signin.jpg";
+import { useNavigate } from "react-router-dom";
 
 export default function SignIn() {
+    const navigate = useNavigate();
+    const handleSignUp = () => {
+        navigate("/signup");
+    };
+
     return (
         <div className={SignInStyle.container}>
             <div className={SignInStyle.illust}>
@@ -19,7 +25,9 @@ export default function SignIn() {
                 </div>
                 <div className={SignInStyle.signUp}>
                     <p className={SignInStyle.text}>No account ?</p>
-                    <a className={SignInStyle.link}>Sign up for free </a>
+                    <a className={SignInStyle.link} onClick={handleSignUp}>
+                        Sign up for free{" "}
+                    </a>
                 </div>
             </div>
         </div>
