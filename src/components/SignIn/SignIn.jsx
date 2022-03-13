@@ -13,12 +13,14 @@ export default function SignIn() {
                     Welcome to <br />
                     To Do App
                 </h1>
-                <h2 className={SignInStyle.subtitle}>Sign In Account</h2>
                 <div className={SignInStyle.form}>
+                    <h2 className={SignInStyle.subtitle}>Sign in account</h2>
                     <SignInForm />
                 </div>
-                <p className={SignInStyle.text}>No account ?</p>
-                <a className={SignInStyle.link}>Sign up for free </a>
+                <div className={SignInStyle.signUp}>
+                    <p className={SignInStyle.text}>No account ?</p>
+                    <a className={SignInStyle.link}>Sign up for free </a>
+                </div>
             </div>
         </div>
     );
