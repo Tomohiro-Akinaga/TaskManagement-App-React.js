@@ -1,7 +1,8 @@
 import PropTypes from "prop-types";
 import { useEffect } from "react";
 import { useNavigate } from "react-router";
-import SignOut from "./Main-SignOutButton/SignOut.jsx";
+import Header from "./Header/Header.jsx";
+import SignOut from "../Main/Header/Header-SignOutButton/SignOut.jsx";
 
 function Main({ user }) {
     const navigate = useNavigate();
@@ -11,8 +12,8 @@ function Main({ user }) {
 
     return (
         <>
-            <h1>Hello, World</h1>
-            <SignOut />
+            <Header />
+            {/* <SignOut /> */}
         </>
     );
 }
