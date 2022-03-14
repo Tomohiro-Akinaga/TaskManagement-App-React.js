@@ -5,7 +5,6 @@ import SignOut from "./Main-SignOutButton/SignOut.jsx";
 
 function Main({ user }) {
     const navigate = useNavigate();
-    
     useEffect(() => {
         user ? navigate("/") : navigate("/signin");
     }, [user]);
