@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 import { useEffect } from "react";
 import { useNavigate } from "react-router";
 import Header from "./Header/Header.jsx";
-import Main from "../Main/Main.jsx";
+import Main from "../Home/Main/Main.jsx";
 import HomeStyle from "./Home.module.scss";
 
 function Home({ user }) {
@@ -15,7 +15,7 @@ function Home({ user }) {
     return (
         <div className={HomeStyle.container}>
             <Header />
-            {/* <Main /> */}
+            <Main />
         </div>
     );
 }
