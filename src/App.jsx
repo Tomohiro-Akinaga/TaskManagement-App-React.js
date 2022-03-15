@@ -7,7 +7,7 @@ import SignUp from "./components/SignUp/SignUp.jsx";
 import SignIn from "./components/SignIn/SignIn.jsx";
 /* Firebase */
 import { onAuthStateChanged } from "firebase/auth";
-import auth from "./firebaseConfig.js";
+import { auth } from "./firebaseConfig.js";
 
 function App() {
     const [user, setUser] = useState();

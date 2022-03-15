@@ -2,7 +2,7 @@ import FormStyle from "./SignUpForm.module.scss";
 import { useState } from "react";
 import { useNavigate } from "react-router";
 import { createUserWithEmailAndPassword } from "firebase/auth";
-import auth from "../../../firebaseConfig.js";
+import { auth } from "../../../firebaseConfig.js";
 
 export default function SignUpForm() {
     const [email, setEmail] = useState();

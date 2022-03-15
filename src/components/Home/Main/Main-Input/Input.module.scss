@@ -1,0 +1,51 @@
+@import "../../../../variable.scss";
+
+.container {
+    border: solid 1px #000;
+    height: 35px;
+    display: flex;
+    border-radius: 4px;
+    background-color: $input-container;
+}
+
+.button {
+    border: none;
+    height: 100%;
+    width: 35px;
+    transition: all 0.2s;
+    padding: 7px;
+    background-color: transparent;
+    &:hover {
+        cursor: pointer;
+    }
+    &:active {
+        transform: scale(0.9);
+    }
+}
+
+// .icon {
+//     height: 100%;
+//     font-weight: 400;
+//     color: #fff;
+//     // -webkit-font-smoothing: antialiased;
+// }
+
+.plusLogo {
+    height: 100%;
+}
+
+.input {
+    border: none;
+    height: 100%;
+    width: 100%;
+    background-color: transparent;
+    color: #fff;
+    padding: 0 15px;
+    &:focus {
+        outline: none;
+    }
+    &::placeholder {
+        color: #fff;
+        font-weight: 300;
+    }
+}

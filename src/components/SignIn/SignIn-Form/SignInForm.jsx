@@ -1,6 +1,6 @@
 import { useState } from "react";
 import FormStyle from "./SignInForm.module.scss";
-import auth from "../../../firebaseConfig.js";
+import { auth } from "../../../firebaseConfig.js";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { useNavigate } from "react-router";
 

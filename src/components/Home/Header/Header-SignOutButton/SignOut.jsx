@@ -1,4 +1,4 @@
-import auth from "../../../../firebaseConfig.js";
+import { auth } from "../../../../firebaseConfig.js";
 import { signOut } from "firebase/auth";
 import { useNavigate } from "react-router";
 import SignOutStyle from "./SignOutButton.module.scss";
