@@ -1,6 +1,7 @@
 import auth from "../../../../firebaseConfig.js";
 import { signOut } from "firebase/auth";
 import { useNavigate } from "react-router";
+import SignOutStyle from "./SignOutButton.module.scss";
 
 export default function SignOut() {
     const navigate = useNavigate();
@@ -15,7 +16,11 @@ export default function SignOut() {
             });
     };
     return (
-        <button type="button" onClick={handleClick}>
+        <button
+            type="button"
+            onClick={handleClick}
+            className={SignOutStyle.button}
+        >
             Sign Out
         </button>
     );

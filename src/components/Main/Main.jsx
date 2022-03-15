@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 import { useEffect } from "react";
 import { useNavigate } from "react-router";
 import Header from "./Header/Header.jsx";
-import SignOut from "../Main/Header/Header-SignOutButton/SignOut.jsx";
+import MainStyle from "./Main.module.scss";
 
 function Main({ user }) {
     const navigate = useNavigate();
@@ -11,10 +11,9 @@ function Main({ user }) {
     }, [user]);
 
     return (
-        <>
+        <div className={MainStyle.container}>
             <Header />
-            {/* <SignOut /> */}
-        </>
+        </div>
     );
 }
 

@@ -1,8 +1,11 @@
 import helperTodayDate from "./helperTodayDate.js";
-
-const {day, month, date} = helperTodayDate();
-console.log(day, month, date);
+import DisplayTimeStyle from "./DisplayTime.module.scss";
+const { day, month, date } = helperTodayDate();
 
 export default function DisplayTime() {
-    return <p>{day}, {month}{date}</p>;
+    return (
+        <p className={DisplayTimeStyle.text}>
+            {day}, {month} {date}
+        </p>
+    );
 }
