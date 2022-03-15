@@ -1,0 +1,29 @@
+@import "../../../variable.scss";
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+}
+
+.left {
+    display: flex;
+    align-items: center;
+}
+
+// .icon {
+//     height: 40px;
+//     margin-right: 10px;
+//     color: $logo;
+// }
+
+.title {
+    font-size: 1.8rem;
+    font-weight: 300;
+    color: $title;
+}
+
+.right {
+    height: 100%;
+}
