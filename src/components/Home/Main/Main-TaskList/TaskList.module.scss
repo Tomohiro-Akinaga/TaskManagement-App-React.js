@@ -1,0 +1,30 @@
+.list {
+    height: 35px;
+    border: solid 1px #000;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+}
+
+.button {
+    height: 100%;
+    padding: 7px;
+    border: none;
+    background-color: transparent;
+    transition: all 0.2s;
+    &:hover {
+        cursor: pointer;
+    }
+    &:active {
+        transform: scale(0.9);
+    }
+}
+
+.image {
+    height: 100%;
+}
+
+.text {
+    padding: 0 15px;
+    font-weight: 300;
+}

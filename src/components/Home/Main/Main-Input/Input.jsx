@@ -20,8 +20,12 @@ export default function Input() {
     };
 
     return (
-        <form className={InputStyle.container} onSubmit={handleSubmit}>
-            <button className={InputStyle.button}>
+        <form
+            type="submit"
+            className={InputStyle.container}
+            onSubmit={handleSubmit}
+        >
+            <button type="submit" className={InputStyle.button}>
                 <img src={plusLogo} className={InputStyle.plusLogo} />
             </button>
             <input
