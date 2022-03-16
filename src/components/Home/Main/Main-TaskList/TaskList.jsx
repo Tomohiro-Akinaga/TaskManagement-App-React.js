@@ -39,12 +39,13 @@ function TaskList({ form }) {
 
     return (
         <ul className={TaskListStyle.container}>
-            {tasks.map((item, index) => (
+            {tasks.map((item) => (
                 <TaskItem
-                    key={index}
+                    key={item.id}
                     id={item.id}
                     task={item.task}
                     complete={item.complete}
+                    setUsersData={setUsersData}
                 />
             ))}
         </ul>
