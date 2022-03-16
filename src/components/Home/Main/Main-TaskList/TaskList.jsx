@@ -5,7 +5,7 @@ import { db } from "../../../../firebaseConfig.js";
 import TaskItem from "../Main-TaskItem/TaskItem.jsx";
 import TaskListStyle from "./TaskList.module.scss";
 
-export default function TaskList() {
+export default function TaskList({ form }) {
     const [usersData, setUsersData] = useState();
     const tasks = [];
 
@@ -21,7 +21,7 @@ export default function TaskList() {
             }
         })();
         return () => (unmounted = true);
-    }, []);
+    }, [form]);
 
     if (usersData) {
         usersData.forEach((item) => {

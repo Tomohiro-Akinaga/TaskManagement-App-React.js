@@ -5,7 +5,7 @@ import { useState } from "react";
 import { db } from "../../../../firebaseConfig.js";
 import { collection, addDoc } from "firebase/firestore";
 
-export default function Input() {
+export default function Input({ setForm }) {
     const [task, setTask] = useState();
     const [taskComplete, setTaskComplete] = useState(false);
     const time = new Date();
@@ -15,8 +15,10 @@ export default function Input() {
         await addDoc(collection(db, "users"), {
             tasks: task,
             complete: taskComplete,
-            timestamp:time
+            timestamp: time,
         });
+        setForm(task);
+        setTask();
         e.target.reset();
     };
 
