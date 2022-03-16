@@ -1,11 +1,11 @@
-import { useState } from "react";
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
+import PropTypes from "prop-types";
 import { collection, getDocs, query, orderBy } from "firebase/firestore";
 import { db } from "../../../../firebaseConfig.js";
 import TaskItem from "../Main-TaskItem/TaskItem.jsx";
 import TaskListStyle from "./TaskList.module.scss";
 
-export default function TaskList({ form }) {
+function TaskList({ form }) {
     const [usersData, setUsersData] = useState();
     const tasks = [];
 
@@ -50,3 +50,9 @@ export default function TaskList({ form }) {
         </ul>
     );
 }
+
+TaskList.propTypes = {
+    form: PropTypes.string,
+};
+
+export default TaskList;

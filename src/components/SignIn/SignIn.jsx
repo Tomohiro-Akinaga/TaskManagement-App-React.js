@@ -1,10 +1,11 @@
+import PropTypes from "prop-types";
 import SignInForm from "./SignIn-Form/SignInForm.jsx";
 import SignInStyle from "./SignIn.module.scss";
 import illust from "../../resources/img/signin.jpg";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 
-export default function SignIn({ user }) {
+function SignIn({ user }) {
     const navigate = useNavigate();
 
     const handleSignUp = () => {
@@ -39,3 +40,9 @@ export default function SignIn({ user }) {
         </div>
     );
 }
+
+SignIn.propTypes = {
+    user: PropTypes.object,
+};
+
+export default SignIn;

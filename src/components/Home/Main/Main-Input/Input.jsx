@@ -1,11 +1,12 @@
 import React from "react";
+import PropTypes from "prop-types";
 import InputStyle from "./Input.module.scss";
 import plusLogo from "../../../../resources/img/plus.png";
 import { useState } from "react";
 import { db } from "../../../../firebaseConfig.js";
 import { collection, addDoc } from "firebase/firestore";
 
-export default function Input({ setForm }) {
+function Input({ setForm }) {
     const [task, setTask] = useState();
     const [taskComplete, setTaskComplete] = useState(false);
     const time = new Date();
@@ -40,3 +41,9 @@ export default function Input({ setForm }) {
         </form>
     );
 }
+
+Input.propTypes = {
+    setForm: PropTypes.func,
+};
+
+export default Input;
