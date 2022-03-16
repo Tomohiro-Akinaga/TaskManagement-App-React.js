@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "../../../../firebaseConfig.js";
 import TaskItem from "../Main-TaskItem/TaskItem.jsx";
+import TaskListStyle from "./TaskList.module.scss";
 
 export default function TaskList() {
     const [usersData, setUsersData] = useState();
@@ -30,13 +31,17 @@ export default function TaskList() {
             tasks.push(user);
         });
     }
-    return <ul>{tasks.length !== 0 && <TaskItem id={tasks.id} />}</ul>;
-}
 
-// {tasks && tasks.map((item) => {
-//     <TaskItem
-//     id={item.id}
-//     tasks={item.tasks}
-//     complete={item.complete}
-//     />
-// })}
+    return (
+        <ul className={TaskListStyle.container}>
+            {tasks.map((item, index) => (
+                <TaskItem
+                    key={index}
+                    id={item.id}
+                    task={item.task}
+                    complete={item.complete}
+                />
+            ))}
+        </ul>
+    );
+}

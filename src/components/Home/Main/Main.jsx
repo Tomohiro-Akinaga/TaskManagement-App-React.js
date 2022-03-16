@@ -4,7 +4,7 @@ import MainStyle from "./Main.module.scss";
 
 export default function Main() {
     return (
-        <main className={MainStyle.list}>
+        <main className={MainStyle.container}>
             <TaskList />
             <Input />
         </main>
