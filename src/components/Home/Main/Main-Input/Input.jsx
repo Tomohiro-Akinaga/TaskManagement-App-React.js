@@ -8,15 +8,16 @@ import { collection, addDoc } from "firebase/firestore";
 export default function Input() {
     const [task, setTask] = useState();
     const [taskComplete, setTaskComplete] = useState(false);
-    const userID = Math.random().toString(36).substr(2);
+    const time = new Date();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         await addDoc(collection(db, "users"), {
-            id: userID,
             tasks: task,
             complete: taskComplete,
+            timestamp:time
         });
+        e.target.reset();
     };
 
     return (

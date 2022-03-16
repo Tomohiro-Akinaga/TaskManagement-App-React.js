@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useEffect } from "react";
-import { collection, getDocs } from "firebase/firestore";
+import { collection, getDocs, query, orderBy } from "firebase/firestore";
 import { db } from "../../../../firebaseConfig.js";
 import TaskItem from "../Main-TaskItem/TaskItem.jsx";
 import TaskListStyle from "./TaskList.module.scss";
@@ -12,7 +12,10 @@ export default function TaskList() {
     useEffect(() => {
         let unmounted = false;
         (async () => {
-            const querySnapshot = await getDocs(collection(db, "users"));
+            const usersRef = collection(db, "users");
+            const q = query(usersRef, orderBy("timestamp"));
+            const querySnapshot = await getDocs(q);
+
             if (!unmounted) {
                 setUsersData(querySnapshot.docs);
             }
@@ -28,6 +31,8 @@ export default function TaskList() {
                 item._document.data.value.mapValue.fields.tasks.stringValue;
             user.complete =
                 item._document.data.value.mapValue.fields.complete.booleanValue;
+            user.timestamp =
+                item._document.data.value.mapValue.fields.timestamp.timestampValue;
             tasks.push(user);
         });
     }

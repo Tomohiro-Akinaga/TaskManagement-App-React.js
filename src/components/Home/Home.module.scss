@@ -1,6 +1,11 @@
 @import "../../variable.scss";
 
 .container {
-    background: linear-gradient($container-background1, $container-background2);
+    // background: linear-gradient($container-background1, $container-background2);
     height: 100vh;
+    background-image: url("../../resources/img/signup-background.jpg");
+    background-size: cover;
+    &::before {
+        backdrop-filter: brightness(60%);
+    }
 }
