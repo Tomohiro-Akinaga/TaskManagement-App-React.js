@@ -4,6 +4,7 @@ import { useNavigate } from "react-router";
 import Header from "./Header/Header.jsx";
 import Main from "../Home/Main/Main.jsx";
 import HomeStyle from "./Home.module.scss";
+import { useState } from "react";
 
 function Home({ user }) {
     const navigate = useNavigate();
@@ -12,10 +13,12 @@ function Home({ user }) {
         user ? navigate("/") : navigate("/signin");
     }, [user]);
 
+    const [important, setImportant] = useState(false);
+
     return (
         <div className={HomeStyle.container}>
-            <Header />
-            <Main />
+            <Header important={important} setImportant={setImportant} />
+            <Main important={important} />
         </div>
     );
 }
