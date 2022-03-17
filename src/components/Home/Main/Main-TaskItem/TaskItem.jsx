@@ -11,6 +11,7 @@ import {
 import PropTypes from "prop-types";
 import circle from "../../../../resources/img/circle.png";
 import circleCheck from "../../../../resources/img/check-mark.png";
+import trash from "../../../../resources/img/trash.png";
 import TaskItemStyle from "./TaskItem.module.scss";
 import { useState } from "react";
 import { useEffect } from "react";
@@ -18,7 +19,7 @@ import { useEffect } from "react";
 function TaskItem({ id, task, complete, setUsersData }) {
     const [isComplete, setIsComplete] = useState(complete);
 
-    const handleClick = async () => {
+    const handleClickCheck = async () => {
         const docRef = doc(db, "users", id);
         const docSnap = await getDoc(docRef);
         const isComplete =
@@ -50,14 +51,28 @@ function TaskItem({ id, task, complete, setUsersData }) {
             data-id={id}
             data-complete={complete}
         >
-            <button className={TaskItemStyle.button} onClick={handleClick}>
+            <button
+                className={TaskItemStyle.buttonCheck}
+                onClick={handleClickCheck}
+            >
                 {!complete && (
                     <img src={circle} className={TaskItemStyle.imageCircle} />
                 )}
                 {complete && (
-                    <img src={circleCheck} className={TaskItemStyle.imageCircle} />
+                    <img
+                        src={circleCheck}
+                        className={TaskItemStyle.imageCircle}
+                    />
                 )}
             </button>
+            {complete && (
+                <button className={TaskItemStyle.buttonTrash}>
+                    <img
+                        src={trash}
+                        className={TaskItemStyle.imageTrash}
+                    />
+                </button>
+            )}
             <p className={TaskItemStyle.text}>{task}</p>
         </li>
     );
