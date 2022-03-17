@@ -7,6 +7,7 @@ import TaskListStyle from "./TaskList.module.scss";
 
 function TaskList({ form }) {
     const [usersData, setUsersData] = useState();
+    const [heading, setHeading] = useState(false);
     const tasks = [];
 
     useEffect(() => {
@@ -38,8 +39,8 @@ function TaskList({ form }) {
     }
 
     return (
-        <>
-            <ul className={TaskListStyle.container}>
+        <div className={TaskListStyle.container}>
+            <ul className={TaskListStyle.list}>
                 {tasks.map(
                     (item) =>
                         !item.complete && (
@@ -54,7 +55,21 @@ function TaskList({ form }) {
                 )}
             </ul>
             <p className={TaskListStyle.heading}>Completed</p>
-        </>
+            <ul className={TaskListStyle.listComplete}>
+                {tasks.map(
+                    (item) =>
+                        item.complete && (
+                            <TaskItem
+                                key={item.id}
+                                id={item.id}
+                                task={item.task}
+                                complete={item.complete}
+                                setUsersData={setUsersData}
+                            />
+                        )
+                )}
+            </ul>
+        </div>
     );
 }
 
