@@ -1,5 +1,17 @@
+@import "../../../../variable.scss";
+
 .container {
     margin: 0 20px;
     height: 90%;
     overflow: scroll;
+}
+
+.heading {
+    color: #fff;
+    background-color: $heading;
+    border-radius: 5px;
+    width: 89px;
+    padding: 0 20px;
+    margin-left: 20px;
+    font-size: 0.9rem;
 }

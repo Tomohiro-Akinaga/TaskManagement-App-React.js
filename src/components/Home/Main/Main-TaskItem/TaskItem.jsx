@@ -9,7 +9,8 @@ import {
     orderBy,
 } from "firebase/firestore";
 import PropTypes from "prop-types";
-import cirlce from "../../../../resources/img/circle.png";
+import circle from "../../../../resources/img/circle.png";
+import circleCheck from "../../../../resources/img/check-mark.png";
 import TaskItemStyle from "./TaskItem.module.scss";
 import { useState } from "react";
 import { useEffect } from "react";
@@ -50,7 +51,12 @@ function TaskItem({ id, task, complete, setUsersData }) {
             data-complete={complete}
         >
             <button className={TaskItemStyle.button} onClick={handleClick}>
-                <img src={cirlce} className={TaskItemStyle.image} />
+                {!complete && (
+                    <img src={circle} className={TaskItemStyle.imageCircle} />
+                )}
+                {complete && (
+                    <img src={circleCheck} className={TaskItemStyle.imageCircle} />
+                )}
             </button>
             <p className={TaskItemStyle.text}>{task}</p>
         </li>

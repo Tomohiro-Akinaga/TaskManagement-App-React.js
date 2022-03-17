@@ -38,17 +38,23 @@ function TaskList({ form }) {
     }
 
     return (
-        <ul className={TaskListStyle.container}>
-            {tasks.map((item) => (
-                <TaskItem
-                    key={item.id}
-                    id={item.id}
-                    task={item.task}
-                    complete={item.complete}
-                    setUsersData={setUsersData}
-                />
-            ))}
-        </ul>
+        <>
+            <ul className={TaskListStyle.container}>
+                {tasks.map(
+                    (item) =>
+                        !item.complete && (
+                            <TaskItem
+                                key={item.id}
+                                id={item.id}
+                                task={item.task}
+                                complete={item.complete}
+                                setUsersData={setUsersData}
+                            />
+                        )
+                )}
+            </ul>
+            <p className={TaskListStyle.heading}>Completed</p>
+        </>
     );
 }
 
