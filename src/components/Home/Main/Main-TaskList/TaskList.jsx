@@ -51,6 +51,7 @@ function TaskList({ form }) {
                                 id={item.id}
                                 task={item.task}
                                 complete={item.complete}
+                                important={item.important}
                                 setUsersData={setUsersData}
                             />
                         )

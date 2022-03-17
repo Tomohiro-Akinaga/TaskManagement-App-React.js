@@ -9,6 +9,7 @@ import { collection, addDoc } from "firebase/firestore";
 function Input({ setForm }) {
     const [task, setTask] = useState();
     const [taskComplete, setTaskComplete] = useState(false);
+    const [important, setImportant] = useState(false);
     const time = new Date();
 
     const handleSubmit = async (e) => {
@@ -16,6 +17,7 @@ function Input({ setForm }) {
         await addDoc(collection(db, "users"), {
             tasks: task,
             complete: taskComplete,
+            important: important,
             timestamp: time,
         });
         setForm(task);
