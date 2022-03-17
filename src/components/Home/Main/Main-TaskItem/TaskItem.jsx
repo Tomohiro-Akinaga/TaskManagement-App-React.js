@@ -7,6 +7,7 @@ import {
     collection,
     query,
     orderBy,
+    deleteDoc,
 } from "firebase/firestore";
 import PropTypes from "prop-types";
 import circle from "../../../../resources/img/circle.png";
@@ -18,6 +19,7 @@ import { useEffect } from "react";
 
 function TaskItem({ id, task, complete, setUsersData }) {
     const [isComplete, setIsComplete] = useState(complete);
+    const [remove, setRemove] = useState(false);
 
     const handleClickCheck = async () => {
         const docRef = doc(db, "users", id);
@@ -45,6 +47,25 @@ function TaskItem({ id, task, complete, setUsersData }) {
         return () => (unmounted = true);
     }, [isComplete]);
 
+    const handleClickTrash = async () => {
+        await deleteDoc(doc(db, "users", id));
+        setRemove(!remove);
+    };
+
+    useEffect(() => {
+        let unmounted = false;
+        (async () => {
+            const usersRef = collection(db, "users");
+            const q = query(usersRef, orderBy("timestamp"));
+            const querySnapshot = await getDocs(q);
+
+            if (!unmounted) {
+                setUsersData(querySnapshot.docs);
+            }
+        })();
+        return () => (unmounted = true);
+    }, [remove]);
+
     return (
         <li
             className={TaskItemStyle.list}
@@ -66,11 +87,11 @@ function TaskItem({ id, task, complete, setUsersData }) {
                 )}
             </button>
             {complete && (
-                <button className={TaskItemStyle.buttonTrash}>
-                    <img
-                        src={trash}
-                        className={TaskItemStyle.imageTrash}
-                    />
+                <button
+                    className={TaskItemStyle.buttonTrash}
+                    onClick={handleClickTrash}
+                >
+                    <img src={trash} className={TaskItemStyle.imageTrash} />
                 </button>
             )}
             <p className={TaskItemStyle.text}>{task}</p>
