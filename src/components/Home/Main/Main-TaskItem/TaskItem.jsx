@@ -14,6 +14,7 @@ import circleImg from "../../../../resources/img/circle.png";
 import circleCheckImg from "../../../../resources/img/check-mark.png";
 import trashImg from "../../../../resources/img/trash.png";
 import importantImg from "../../../../resources/img/important.png";
+import isImportantImg from "../../../../resources/img/whole-star.png";
 import TaskItemStyle from "./TaskItem.module.scss";
 import { useState } from "react";
 import { useEffect } from "react";
@@ -100,6 +101,7 @@ function TaskItem({ id, task, complete, important, setUsersData }) {
             className={TaskItemStyle.list}
             data-id={id}
             data-complete={complete}
+            data-important={important}
         >
             <button
                 className={TaskItemStyle.buttonCheck}
@@ -124,7 +126,7 @@ function TaskItem({ id, task, complete, important, setUsersData }) {
                     onClick={handleClickImportant}
                 >
                     <img
-                        src={importantImg}
+                        src={important ? importantImg : isImportantImg}
                         className={TaskItemStyle.imageImportant}
                     />
                 </button>

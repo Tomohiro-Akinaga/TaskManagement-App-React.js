@@ -33,6 +33,8 @@ function TaskList({ form }) {
                 item._document.data.value.mapValue.fields.tasks.stringValue;
             user.complete =
                 item._document.data.value.mapValue.fields.complete.booleanValue;
+            user.important =
+                item._document.data.value.mapValue.fields.important.booleanValue;
             user.timestamp =
                 item._document.data.value.mapValue.fields.timestamp.timestampValue;
             tasks.push(user);
