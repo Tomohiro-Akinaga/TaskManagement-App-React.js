@@ -4,6 +4,7 @@ import { collection, getDocs, query, orderBy } from "firebase/firestore";
 import { db } from "../../../../firebaseConfig.js";
 import TaskItem from "../Main-TaskItem/TaskItem.jsx";
 import TaskListStyle from "./TaskList.module.scss";
+import helperCheckCompleteExist from "./helperCheckCompleteExist.js";
 
 function TaskList({ form }) {
     const [usersData, setUsersData] = useState();
@@ -37,6 +38,7 @@ function TaskList({ form }) {
             tasks.push(user);
         });
     }
+    const completeTaskExist = helperCheckCompleteExist(tasks);
 
     return (
         <div className={TaskListStyle.container}>
@@ -54,7 +56,9 @@ function TaskList({ form }) {
                         )
                 )}
             </ul>
-            <p className={TaskListStyle.heading}>Completed</p>
+            {completeTaskExist && (
+                <p className={TaskListStyle.heading}>Completed</p>
+            )}
             <ul className={TaskListStyle.listComplete}>
                 {tasks.map(
                     (item) =>
