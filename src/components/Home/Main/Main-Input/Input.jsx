@@ -5,6 +5,7 @@ import plusLogo from "../../../../resources/img/plus.png";
 import { useState } from "react";
 import { db } from "../../../../firebaseConfig.js";
 import { collection, addDoc } from "firebase/firestore";
+import { auth } from "../../../../firebaseConfig.js";
 
 function Input({ setForm }) {
     const [task, setTask] = useState();
@@ -12,9 +13,15 @@ function Input({ setForm }) {
     const [important, setImportant] = useState(false);
     const time = new Date();
 
+    if (!auth.currentUser) {
+        return null;
+    }
+
+    const userEmail = auth.currentUser.email;
+
     const handleSubmit = async (e) => {
         e.preventDefault();
-        await addDoc(collection(db, "users"), {
+        await addDoc(collection(db, userEmail), {
             tasks: task,
             complete: taskComplete,
             important: important,

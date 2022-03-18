@@ -9,6 +9,7 @@ import {
     orderBy,
     deleteDoc,
 } from "firebase/firestore";
+import { auth } from "../../../../firebaseConfig.js";
 import PropTypes from "prop-types";
 import circleImg from "../../../../resources/img/circle.png";
 import circleCheckImg from "../../../../resources/img/check-mark.png";
@@ -37,38 +38,42 @@ function TaskItem({ id, task, complete, important, setUsersData }) {
         setIsComplete(!isComplete);
     };
 
-    useEffect(() => {
-        let unmounted = false;
-        (async () => {
-            const usersRef = collection(db, "users");
-            const q = query(usersRef, orderBy("timestamp"));
-            const querySnapshot = await getDocs(q);
+    // useEffect(() => {
+    //     if (!auth.currentUser) {
+    //         return null;
+    //     }
+    //     const userEmail = auth.currentUser.email;
+    //     let unmounted = false;
+    //     (async () => {
+    //         const usersRef = collection(db, userEmail);
+    //         const q = query(usersRef, orderBy("timestamp"));
+    //         const querySnapshot = await getDocs(q);
 
-            if (!unmounted) {
-                setUsersData(querySnapshot.docs);
-            }
-        })();
-        return () => (unmounted = true);
-    }, [isComplete]);
+    //         if (!unmounted) {
+    //             setUsersData(querySnapshot.docs);
+    //         }
+    //     })();
+    //     return () => (unmounted = true);
+    // }, [isComplete]);
 
     const handleClickTrash = async () => {
         await deleteDoc(doc(db, "users", id));
         setRemove(!remove);
     };
 
-    useEffect(() => {
-        let unmounted = false;
-        (async () => {
-            const usersRef = collection(db, "users");
-            const q = query(usersRef, orderBy("timestamp"));
-            const querySnapshot = await getDocs(q);
+    // useEffect(() => {
+    //     let unmounted = false;
+    //     (async () => {
+    //         const usersRef = collection(db, "users");
+    //         const q = query(usersRef, orderBy("timestamp"));
+    //         const querySnapshot = await getDocs(q);
 
-            if (!unmounted) {
-                setUsersData(querySnapshot.docs);
-            }
-        })();
-        return () => (unmounted = true);
-    }, [remove]);
+    //         if (!unmounted) {
+    //             setUsersData(querySnapshot.docs);
+    //         }
+    //     })();
+    //     return () => (unmounted = true);
+    // }, [remove]);
 
     const handleClickImportant = async () => {
         const docRef = doc(db, "users", id);
@@ -82,19 +87,19 @@ function TaskItem({ id, task, complete, important, setUsersData }) {
         setIsImportant(!isImportant);
     };
 
-    useEffect(() => {
-        let unmounted = false;
-        (async () => {
-            const usersRef = collection(db, "users");
-            const q = query(usersRef, orderBy("timestamp"));
-            const querySnapshot = await getDocs(q);
+    // useEffect(() => {
+    //     let unmounted = false;
+    //     (async () => {
+    //         const usersRef = collection(db, "users");
+    //         const q = query(usersRef, orderBy("timestamp"));
+    //         const querySnapshot = await getDocs(q);
 
-            if (!unmounted) {
-                setUsersData(querySnapshot.docs);
-            }
-        })();
-        return () => (unmounted = true);
-    }, [isImportant]);
+    //         if (!unmounted) {
+    //             setUsersData(querySnapshot.docs);
+    //         }
+    //     })();
+    //     return () => (unmounted = true);
+    // }, [isImportant]);
 
     return (
         <li
@@ -126,7 +131,7 @@ function TaskItem({ id, task, complete, important, setUsersData }) {
                     onClick={handleClickImportant}
                 >
                     <img
-                        src={important ? importantImg : isImportantImg}
+                        src={!important ? importantImg : isImportantImg}
                         className={TaskItemStyle.imageImportant}
                     />
                 </button>

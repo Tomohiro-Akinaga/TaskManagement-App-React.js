@@ -7,13 +7,12 @@ import HomeStyle from "./Home.module.scss";
 import { useState } from "react";
 
 function Home({ user }) {
+    const [important, setImportant] = useState(false);
     const navigate = useNavigate();
 
     useEffect(() => {
         user ? navigate("/") : navigate("/signin");
     }, [user]);
-
-    const [important, setImportant] = useState(false);
 
     return (
         <div className={HomeStyle.container}>

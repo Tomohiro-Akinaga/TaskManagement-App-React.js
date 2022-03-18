@@ -7,11 +7,10 @@ import PropTypes from "prop-types";
 
 export default function Main({ important }) {
     const [form, setForm] = useState();
-
     return (
         <main className={MainStyle.container}>
             {!important && <TaskList form={form} />}
-            {important && <ImportantList />}
+            {important && <ImportantList important={important} />}
             <Input setForm={setForm} />
         </main>
     );

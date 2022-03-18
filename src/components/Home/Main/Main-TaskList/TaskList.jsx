@@ -5,6 +5,7 @@ import { db } from "../../../../firebaseConfig.js";
 import TaskItem from "../Main-TaskItem/TaskItem.jsx";
 import TaskListStyle from "./TaskList.module.scss";
 import helperCheckCompleteExist from "./helperCheckCompleteExist.js";
+import { auth } from "../../../../firebaseConfig.js";
 
 function TaskList({ form }) {
     const [usersData, setUsersData] = useState();
@@ -13,11 +14,14 @@ function TaskList({ form }) {
 
     useEffect(() => {
         let unmounted = false;
+        if (!auth.currentUser) {
+            return null;
+        }
+        const userEmail = auth.currentUser.email;
         (async () => {
-            const usersRef = collection(db, "users");
+            const usersRef = collection(db, userEmail);
             const q = query(usersRef, orderBy("timestamp"));
             const querySnapshot = await getDocs(q);
-
             if (!unmounted) {
                 setUsersData(querySnapshot.docs);
             }
@@ -40,6 +44,7 @@ function TaskList({ form }) {
             tasks.push(user);
         });
     }
+
     const completeTaskExist = helperCheckCompleteExist(tasks);
 
     return (
