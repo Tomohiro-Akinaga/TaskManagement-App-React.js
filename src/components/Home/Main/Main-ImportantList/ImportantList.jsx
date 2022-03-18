@@ -3,8 +3,9 @@ import { useEffect, useState } from "react";
 import { collection, getDocs, query, orderBy } from "firebase/firestore";
 import { db } from "../../../../firebaseConfig.js";
 import ImportantItem from "../Main-ImportantItem/ImportantItem.jsx";
+import PropTypes from "prop-types";
 
-export default function ImportantList() {
+function ImportantList({ userEmail }) {
     const [usersData, setUsersData] = useState();
     const [removeImportant, setRemoveImportant] = useState();
     const tasks = [];
@@ -12,7 +13,7 @@ export default function ImportantList() {
     useEffect(() => {
         let unmounted = false;
         (async () => {
-            const usersRef = collection(db, "users");
+            const usersRef = collection(db, userEmail);
             const q = query(usersRef, orderBy("timestamp"));
             const querySnapshot = await getDocs(q);
 
@@ -51,6 +52,7 @@ export default function ImportantList() {
                                 important={item.important}
                                 timestamp={item.timestamp}
                                 setRemoveImportant={setRemoveImportant}
+                                userEmail={userEmail}
                             />
                         )
                 )}
@@ -58,3 +60,9 @@ export default function ImportantList() {
         </div>
     );
 }
+
+ImportantList.propTypes = {
+    userEmail: PropTypes.string,
+};
+
+export default ImportantList;

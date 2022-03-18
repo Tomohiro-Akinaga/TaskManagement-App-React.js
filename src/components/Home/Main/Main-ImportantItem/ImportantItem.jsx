@@ -4,9 +4,9 @@ import ImportantItemStyle from "./ImportantItem.module.scss";
 import { db } from "../../../../firebaseConfig.js";
 import { doc, updateDoc } from "firebase/firestore";
 
-function ImportantItem({ task, id, setRemoveImportant }) {
+function ImportantItem({ task, id, setRemoveImportant, userEmail }) {
     const handleClickImportant = async () => {
-        const importantRef = doc(db, "users", id);
+        const importantRef = doc(db, userEmail, id);
         await updateDoc(importantRef, {
             important: false,
         });
@@ -33,6 +33,7 @@ ImportantItem.propTypes = {
     task: PropTypes.string,
     id: PropTypes.string,
     setRemoveImportant: PropTypes.func,
+    userEmail: PropTypes.string,
 };
 
 export default ImportantItem;
