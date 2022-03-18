@@ -6,9 +6,11 @@ import Main from "../Home/Main/Main.jsx";
 import HomeStyle from "./Home.module.scss";
 import { useState } from "react";
 import { auth } from "../../firebaseConfig.js";
+import Loading from "../Loading/Loading.jsx";
 
 function Home({ user }) {
     const [important, setImportant] = useState(false);
+    const [loading, setLoading] = useState(true);
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -22,8 +24,13 @@ function Home({ user }) {
 
     return (
         <div className={HomeStyle.container}>
+            {loading && <Loading />}
             <Header important={important} setImportant={setImportant} />
-            <Main important={important} userEmail={userEmail} />
+            <Main
+                important={important}
+                userEmail={userEmail}
+                setLoading={setLoading}
+            />
         </div>
     );
 }

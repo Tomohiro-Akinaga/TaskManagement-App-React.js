@@ -5,11 +5,17 @@ import ImportantList from "./Main-ImportantList/ImportantList.jsx";
 import { useState } from "react";
 import PropTypes from "prop-types";
 
-export default function Main({ important, userEmail }) {
+export default function Main({ important, userEmail, setLoading }) {
     const [form, setForm] = useState();
     return (
         <main className={MainStyle.container}>
-            {!important && <TaskList form={form} userEmail={userEmail} />}
+            {!important && (
+                <TaskList
+                    form={form}
+                    userEmail={userEmail}
+                    setLoading={setLoading}
+                />
+            )}
             {important && (
                 <ImportantList important={important} userEmail={userEmail} />
             )}
@@ -21,4 +27,5 @@ export default function Main({ important, userEmail }) {
 Main.propTypes = {
     important: PropTypes.bool,
     userEmail: PropTypes.string,
+    setLoading: PropTypes.func,
 };
