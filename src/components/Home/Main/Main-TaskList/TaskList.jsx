@@ -7,17 +7,13 @@ import TaskListStyle from "./TaskList.module.scss";
 import helperCheckCompleteExist from "./helperCheckCompleteExist.js";
 import { auth } from "../../../../firebaseConfig.js";
 
-function TaskList({ form }) {
+function TaskList({ form, userEmail }) {
     const [usersData, setUsersData] = useState();
     const [heading, setHeading] = useState(false);
     const tasks = [];
 
     useEffect(() => {
         let unmounted = false;
-        if (!auth.currentUser) {
-            return null;
-        }
-        const userEmail = auth.currentUser.email;
         (async () => {
             const usersRef = collection(db, userEmail);
             const q = query(usersRef, orderBy("timestamp"));
@@ -60,6 +56,7 @@ function TaskList({ form }) {
                                 complete={item.complete}
                                 important={item.important}
                                 setUsersData={setUsersData}
+                                userEmail={userEmail}
                             />
                         )
                 )}
@@ -77,6 +74,7 @@ function TaskList({ form }) {
                                 task={item.task}
                                 complete={item.complete}
                                 setUsersData={setUsersData}
+                                userEmail={userEmail}
                             />
                         )
                 )}
@@ -87,6 +85,7 @@ function TaskList({ form }) {
 
 TaskList.propTypes = {
     form: PropTypes.string,
+    userEmail: PropTypes.string,
 };
 
 export default TaskList;

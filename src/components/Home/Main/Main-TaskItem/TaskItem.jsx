@@ -20,17 +20,17 @@ import TaskItemStyle from "./TaskItem.module.scss";
 import { useState } from "react";
 import { useEffect } from "react";
 
-function TaskItem({ id, task, complete, important, setUsersData }) {
+function TaskItem({ id, task, complete, important, setUsersData, userEmail }) {
     const [isComplete, setIsComplete] = useState(complete);
     const [remove, setRemove] = useState(false);
     const [isImportant, setIsImportant] = useState(false);
 
     const handleClickCheck = async () => {
-        const docRef = doc(db, "users", id);
+        const docRef = doc(db, userEmail, id);
         const docSnap = await getDoc(docRef);
         const isComplete =
             docSnap._document.data.value.mapValue.fields.complete.booleanValue;
-        const completeRef = doc(db, "users", id);
+        const completeRef = doc(db, userEmail, id);
         await updateDoc(completeRef, {
             complete: !isComplete,
             important: false,
@@ -38,68 +38,64 @@ function TaskItem({ id, task, complete, important, setUsersData }) {
         setIsComplete(!isComplete);
     };
 
-    // useEffect(() => {
-    //     if (!auth.currentUser) {
-    //         return null;
-    //     }
-    //     const userEmail = auth.currentUser.email;
-    //     let unmounted = false;
-    //     (async () => {
-    //         const usersRef = collection(db, userEmail);
-    //         const q = query(usersRef, orderBy("timestamp"));
-    //         const querySnapshot = await getDocs(q);
+    useEffect(() => {
+        let unmounted = false;
+        (async () => {
+            const usersRef = collection(db, userEmail);
+            const q = query(usersRef, orderBy("timestamp"));
+            const querySnapshot = await getDocs(q);
 
-    //         if (!unmounted) {
-    //             setUsersData(querySnapshot.docs);
-    //         }
-    //     })();
-    //     return () => (unmounted = true);
-    // }, [isComplete]);
+            if (!unmounted) {
+                setUsersData(querySnapshot.docs);
+            }
+        })();
+        return () => (unmounted = true);
+    }, [isComplete]);
 
     const handleClickTrash = async () => {
-        await deleteDoc(doc(db, "users", id));
+        await deleteDoc(doc(db, userEmail, id));
         setRemove(!remove);
     };
 
-    // useEffect(() => {
-    //     let unmounted = false;
-    //     (async () => {
-    //         const usersRef = collection(db, "users");
-    //         const q = query(usersRef, orderBy("timestamp"));
-    //         const querySnapshot = await getDocs(q);
+    useEffect(() => {
+        let unmounted = false;
+        (async () => {
+            const usersRef = collection(db, userEmail);
+            const q = query(usersRef, orderBy("timestamp"));
+            const querySnapshot = await getDocs(q);
 
-    //         if (!unmounted) {
-    //             setUsersData(querySnapshot.docs);
-    //         }
-    //     })();
-    //     return () => (unmounted = true);
-    // }, [remove]);
+            if (!unmounted) {
+                setUsersData(querySnapshot.docs);
+            }
+        })();
+        return () => (unmounted = true);
+    }, [remove]);
 
     const handleClickImportant = async () => {
-        const docRef = doc(db, "users", id);
+        const docRef = doc(db, userEmail, id);
         const docSnap = await getDoc(docRef);
         const important =
             docSnap._document.data.value.mapValue.fields.important.booleanValue;
-        const importantRef = doc(db, "users", id);
+        const importantRef = doc(db, userEmail, id);
         await updateDoc(importantRef, {
             important: !isImportant,
         });
         setIsImportant(!isImportant);
     };
 
-    // useEffect(() => {
-    //     let unmounted = false;
-    //     (async () => {
-    //         const usersRef = collection(db, "users");
-    //         const q = query(usersRef, orderBy("timestamp"));
-    //         const querySnapshot = await getDocs(q);
+    useEffect(() => {
+        let unmounted = false;
+        (async () => {
+            const usersRef = collection(db, userEmail);
+            const q = query(usersRef, orderBy("timestamp"));
+            const querySnapshot = await getDocs(q);
 
-    //         if (!unmounted) {
-    //             setUsersData(querySnapshot.docs);
-    //         }
-    //     })();
-    //     return () => (unmounted = true);
-    // }, [isImportant]);
+            if (!unmounted) {
+                setUsersData(querySnapshot.docs);
+            }
+        })();
+        return () => (unmounted = true);
+    }, [isImportant]);
 
     return (
         <li
@@ -153,6 +149,7 @@ TaskItem.propTypes = {
     id: PropTypes.string,
     task: PropTypes.string,
     complete: PropTypes.bool,
+    userEmail: PropTypes.string,
 };
 
 export default TaskItem;
