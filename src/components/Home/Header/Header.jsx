@@ -2,8 +2,6 @@ import DisplayTime from "./Header-DisplayTime/DisplayTime.jsx";
 import ImportantButton from "./Header-ImportantButton/ImportantButton.jsx";
 import SignOut from "./Header-SignOutButton/SignOut.jsx";
 import HeaderStyle from "./Header.module.scss";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faLaptopHouse } from "@fortawesome/free-solid-svg-icons";
 import PropTypes from "prop-types";
 
 function Header({ important, setImportant }) {

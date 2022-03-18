@@ -15,6 +15,7 @@ function Home({ user }) {
 
     useEffect(() => {
         user ? navigate("/") : navigate("/signin");
+        setLoading(false);
     }, [user]);
 
     if (!auth.currentUser) {
@@ -25,12 +26,11 @@ function Home({ user }) {
     return (
         <div className={HomeStyle.container}>
             {loading && <Loading />}
-            <Header important={important} setImportant={setImportant} />
-            <Main
+            <Header
                 important={important}
-                userEmail={userEmail}
-                setLoading={setLoading}
+                setImportant={setImportant}
             />
+            <Main important={important} userEmail={userEmail} />
         </div>
     );
 }

@@ -7,7 +7,7 @@ import TaskListStyle from "./TaskList.module.scss";
 import helperCheckCompleteExist from "./helperCheckCompleteExist.js";
 import { auth } from "../../../../firebaseConfig.js";
 
-function TaskList({ form, userEmail, setLoading }) {
+function TaskList({ form, userEmail }) {
     const [usersData, setUsersData] = useState();
     const [heading, setHeading] = useState(false);
     const tasks = [];
@@ -64,10 +64,7 @@ function TaskList({ form, userEmail, setLoading }) {
             {completeTaskExist && (
                 <p className={TaskListStyle.heading}>Completed</p>
             )}
-            <ul
-                className={TaskListStyle.listComplete}
-                onLoad={() => setLoading(false)}
-            >
+            <ul className={TaskListStyle.listComplete}>
                 {tasks.map(
                     (item) =>
                         item.complete && (
@@ -89,7 +86,6 @@ function TaskList({ form, userEmail, setLoading }) {
 TaskList.propTypes = {
     form: PropTypes.string,
     userEmail: PropTypes.string,
-    setLoading: PropTypes.func,
 };
 
 export default TaskList;
